@@ -7,8 +7,8 @@ public class JugadorController : MonoBehaviour
     public float velocidad = 5f;
     public float fuerzaSalto = 5f;
     private Rigidbody rb;
-    public LayerMask capaSuelo; // Capa para identificar el suelo
-    public float distanciaChequeoSuelo = 0.1f; // Distancia del raycast para el chequeo
+    public LayerMask saltable; // Capa para identificar el suelo
+    public float distanciaChequeoSuelo = 0.5f; // Ajustar distancia del raycast
 
     private void Start()
     {
@@ -34,7 +34,8 @@ public class JugadorController : MonoBehaviour
 
     private bool EstaEnElSuelo()
     {
-        // Raycast hacia abajo desde la posición del jugador para verificar si toca el suelo
-        return Physics.Raycast(transform.position, Vector3.down, distanciaChequeoSuelo, capaSuelo);
+        // Raycast desde la base del jugador
+        Vector3 origenRaycast = transform.position - new Vector3(0, transform.localScale.y / 2, 0);
+        return Physics.Raycast(origenRaycast, Vector3.down, distanciaChequeoSuelo, saltable);
     }
 }
