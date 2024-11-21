@@ -22,10 +22,8 @@ public class JugadorController : MonoBehaviour
 
         Vector3 direccionMovimiento = Camera.main.transform.right * horizontal
                                        + Camera.main.transform.forward * vertical;
-        direccionMovimiento.y = 0; // Evita movimiento vertical
         rb.AddForce(direccionMovimiento.normalized * velocidad);
 
-        // Salto
         if (Input.GetKeyDown(KeyCode.Space) && EstaEnElSuelo())
         {
             rb.AddForce(Vector3.up * fuerzaSalto, ForceMode.Impulse);
