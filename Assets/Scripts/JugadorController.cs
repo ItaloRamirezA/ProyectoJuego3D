@@ -4,12 +4,31 @@ using UnityEngine;
 
 public class JugadorController : MonoBehaviour
 {
-    public float velocidad = 5f;
-    public float fuerzaSalto = 5f;
-    private Rigidbody rb;
-    public LayerMask saltable; // Capa para identificar el suelo
-    public float distanciaChequeoSuelo = 0.5f; // Ajustar distancia del raycast
+    // Velocidades del jugador
+    public float velocidadJugador = 1f;
+    public float fuerzaSaltoJugador = 1f;
 
+    // Layers
+    public LayerMask saltable;
+
+    // Raycasts
+    public float raycastSaltoLength = 1f;
+
+    // Elementos
+    private Rigidbody rb;
+    
+    // Verificaciones
+    private bool estaEnSuelo;
+    public bool sePuedeMover = true;
+    public bool haMuerto = false;
+
+    // Combate
+    
+
+    // Audio
+    public AudioClip saltoSonido;
+    public AudioClip muerteSonido;
+    
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -17,23 +36,24 @@ public class JugadorController : MonoBehaviour
 
     private void Update()
     {
-        float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
-
-        Vector3 direccionMovimiento = Camera.main.transform.right * horizontal
-                                       + Camera.main.transform.forward * vertical;
-        rb.AddForce(direccionMovimiento.normalized * velocidad);
-
-        if (Input.GetKeyDown(KeyCode.Space) && EstaEnElSuelo())
-        {
-            rb.AddForce(Vector3.up * fuerzaSalto, ForceMode.Impulse);
-        }
+        salto();
     }
 
-    private bool EstaEnElSuelo()
+    // -------------------------- MOVIMIENTO INICIO -------------------------- 
+    void caminar()
     {
-        // Raycast desde la base del jugador
-        Vector3 origenRaycast = transform.position - new Vector3(0, transform.localScale.y / 2, 0);
-        return Physics.Raycast(origenRaycast, Vector3.down, distanciaChequeoSuelo, saltable);
+        
     }
+
+    void salto()
+    {
+        
+    }
+    // -------------------------- MOVIMIENTO FINAL -------------------------- 
+
+    // -------------------------- GIZMOS INICIO -------------------------- 
+    void OnDrawGizmos() {
+        Gizmos.color = Color.red;
+    }
+    // -------------------------- GIZMOS FINAL -------------------------- 
 }
