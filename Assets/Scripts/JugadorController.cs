@@ -5,8 +5,8 @@ using UnityEngine;
 public class JugadorController : MonoBehaviour
 {
     // Velocidades del jugador
-    public float velocidadJugador = 5f;
-    public float fuerzaSaltoJugador = 5f;
+    public float velocidadJugador = 2f;
+    public float fuerzaSaltoJugador = 2f;
 
     // Layers
     public LayerMask saltable;
@@ -15,12 +15,12 @@ public class JugadorController : MonoBehaviour
     public float raycastSaltoLength = 1.1f; // Salto
 
     // Elementos
-    private Rigidbody rbJugador;
+    private Rigidbody rb;
 
     // Verificaciones
     private bool estaEnSuelo;
-    public bool sePuedeMover = true;
-    public bool estaMuerto = false;
+    public bool sePuedeMover;
+    public bool estaMuerto;
 
     // Audio
     public AudioClip saltoSonido;
@@ -28,7 +28,9 @@ public class JugadorController : MonoBehaviour
 
     private void Start()
     {
-        rbJugador = GetComponent<Rigidbody>();
+        sePuedeMover = true;
+        estaMuerto = false;
+        rb = GetComponent<Rigidbody>();
 
     }
 
@@ -37,7 +39,7 @@ public class JugadorController : MonoBehaviour
         // Si se puede mvoer y no esta muerto.
         if (sePuedeMover && !estaMuerto)
         {
-            // Puede moverse
+            // Movimiento
             caminar();
             salto();
         }
@@ -46,10 +48,16 @@ public class JugadorController : MonoBehaviour
     // -------------------------- MOVIMIENTO INICIO -------------------------- 
     void caminar()
     {
-        float movimientoHorizontal = Input.GetAxis("Horizontal") * velocidadJugador;
-
-        // Aplicar velocidad al Rigidbody solo en el eje X
-        rbJugador.velocity = new Vector3(movimientoHorizontal, rbJugador.velocity.y, 0);
+        float horizontal = Input.GetAxis("Horizontal");
+        float vertical = Input.GetAxis("Vertical");
+        Vector3 direccionMovimiento = Camera.main.transform.right * horizontal
+        + Camera.main.transform.forward * vertical;
+        direccionMovimiento.y = 0; // Evita movimiento vertical
+        rb.AddForce(direccionMovimiento.normalized * velocidadJugador);
+        // Salto
+        if (Input.GetKeyDown(KeyCode.Space) && Mathf.Abs(rb.velocity.y) < 0.1f) {
+        rb.AddForce(Vector3.up * fuerzaSaltoJugador, ForceMode.Impulse);
+}
     }
 
     void salto()
@@ -59,13 +67,8 @@ public class JugadorController : MonoBehaviour
 
         if (Input.GetButtonDown("Jump") && estaEnSuelo)
         {
-            rbJugador.velocity = new Vector3(rbJugador.velocity.x, fuerzaSaltoJugador, rbJugador.velocity.z);
-
-            // Reproducir sonido de salto si está configurado
-            if (saltoSonido != null)
-            {
-                AudioSource.PlayClipAtPoint(saltoSonido, transform.position);
-            }
+            rb.velocity = new Vector3(rb.velocity.x, fuerzaSaltoJugador, rb.velocity.z);
+            // Sonido de salto
         }
     }
     // -------------------------- MOVIMIENTO FINAL -------------------------- 

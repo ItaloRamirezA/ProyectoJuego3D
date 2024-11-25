@@ -418,7 +418,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!65 &417616743
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -452,14 +452,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfe752a1c5d437142b8de42d056199f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocidadJugador: 5
+  velocidadJugador: 2
   fuerzaSaltoJugador: 5
   saltable:
     serializedVersion: 2
     m_Bits: 8
   raycastSaltoLength: 1.5
   sePuedeMover: 1
-  haMuerto: 0
+  estaMuerto: 0
   saltoSonido: {fileID: 0}
   muerteSonido: {fileID: 0}
 --- !u!1 &705507993
