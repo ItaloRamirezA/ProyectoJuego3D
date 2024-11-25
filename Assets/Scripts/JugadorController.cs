@@ -32,14 +32,15 @@ public class JugadorController : MonoBehaviour
         estaMuerto = false;
         rb = GetComponent<Rigidbody>();
 
+        // Bloquear las rotaciones en X y Z para que no ruede
+        rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
     }
 
     private void Update()
-    {   
-        // Si se puede mvoer y no esta muerto.
+    {
+        // Si se puede mover y no está muerto
         if (sePuedeMover && !estaMuerto)
         {
-            // Movimiento
             caminar();
             salto();
         }
@@ -51,25 +52,25 @@ public class JugadorController : MonoBehaviour
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
 
+        // Crear dirección de movimiento en el plano
         Vector3 direccionMovimiento = Camera.main.transform.right * horizontal + Camera.main.transform.forward * vertical;
-        direccionMovimiento.y = 0; // Evita movimiento vertical
-        rb.AddForce(direccionMovimiento.normalized * velocidadJugador);
-        
-        // Salto
-        if (Input.GetKeyDown(KeyCode.Space) && Mathf.Abs(rb.velocity.y) < 0.1f) {
-            rb.AddForce(Vector3.up * fuerzaSaltoJugador, ForceMode.Impulse);
-        }
+        direccionMovimiento.y = 0; // Evitar movimiento vertical
+
+        // Aplicar movimiento ajustando directamente la velocidad del Rigidbody
+        Vector3 nuevaVelocidad = direccionMovimiento.normalized * velocidadJugador;
+        nuevaVelocidad.y = rb.velocity.y; // Mantener la velocidad vertical actual
+        rb.velocity = nuevaVelocidad;
     }
 
     void salto()
     {
-        // Verifica que el jugador toque el suelo con el raycast
+        // Verificar si el jugador está en el suelo con un Raycast
         estaEnSuelo = Physics.Raycast(transform.position, Vector3.down, raycastSaltoLength, saltable);
 
         if (Input.GetButtonDown("Jump") && estaEnSuelo)
         {
+            // Aplicar fuerza de salto directamente al Rigidbody
             rb.velocity = new Vector3(rb.velocity.x, fuerzaSaltoJugador, rb.velocity.z);
-
         }
     }
     // -------------------------- MOVIMIENTO FINAL -------------------------- 
