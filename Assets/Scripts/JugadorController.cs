@@ -50,14 +50,15 @@ public class JugadorController : MonoBehaviour
     {
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
-        Vector3 direccionMovimiento = Camera.main.transform.right * horizontal
-        + Camera.main.transform.forward * vertical;
+
+        Vector3 direccionMovimiento = Camera.main.transform.right * horizontal + Camera.main.transform.forward * vertical;
         direccionMovimiento.y = 0; // Evita movimiento vertical
         rb.AddForce(direccionMovimiento.normalized * velocidadJugador);
+        
         // Salto
         if (Input.GetKeyDown(KeyCode.Space) && Mathf.Abs(rb.velocity.y) < 0.1f) {
-        rb.AddForce(Vector3.up * fuerzaSaltoJugador, ForceMode.Impulse);
-}
+            rb.AddForce(Vector3.up * fuerzaSaltoJugador, ForceMode.Impulse);
+        }
     }
 
     void salto()
