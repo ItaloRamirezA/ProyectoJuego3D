@@ -68,7 +68,7 @@ public class JugadorController : MonoBehaviour
         if (Input.GetButtonDown("Jump") && estaEnSuelo)
         {
             rb.velocity = new Vector3(rb.velocity.x, fuerzaSaltoJugador, rb.velocity.z);
-            // Sonido de salto
+
         }
     }
     // -------------------------- MOVIMIENTO FINAL -------------------------- 
@@ -76,7 +76,6 @@ public class JugadorController : MonoBehaviour
     // -------------------------- GIZMOS INICIO -------------------------- 
     void OnDrawGizmos()
     {
-        // Dibujar el raycast en el editor para depurar
         Gizmos.color = Color.red;
         Gizmos.DrawLine(transform.position, transform.position + Vector3.down * raycastSaltoLength);
     }
