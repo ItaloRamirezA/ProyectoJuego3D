@@ -12,7 +12,7 @@ public class JugadorController : MonoBehaviour
     public LayerMask saltable;
 
     // Raycasts
-    public float raycastSaltoLength = 1.1f; // Salto
+    public float raycastSaltoLength = 1.1f;
 
     // Elementos
     private Rigidbody rb;
