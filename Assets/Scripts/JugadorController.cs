@@ -29,7 +29,7 @@ public class JugadorController : MonoBehaviour
     public Vector3 spawnPoint = new Vector3(145f, 2.35f, 60f);
 
     // Referencia a la cámara
-    public Transform camaraTransform; // Asegúrate de asignar la cámara en el editor
+    public Transform camaraTransform;
 
     // Audios
     AudioClip muerteSonido;
