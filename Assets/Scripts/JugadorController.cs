@@ -31,6 +31,10 @@ public class JugadorController : MonoBehaviour
     // Referencia a la cámara
     public Transform camaraTransform; // Asegúrate de asignar la cámara en el editor
 
+    // Audios
+    AudioClip muerteSonido;
+    AudioClip saltoSonido;
+
     private void Start()
     {   
         vidaActual = MAXVIDAS;
@@ -57,34 +61,28 @@ public class JugadorController : MonoBehaviour
     // -------------------------- MOVIMIENTO INICIO --------------------------
     void caminar()
     {
-        float horizontal = Input.GetAxis("Horizontal"); // A/D (izquierda/derecha)
-        float vertical = Input.GetAxis("Vertical"); // W/S (adelante/atras)
+        float horizontal = Input.GetAxis("Horizontal");
+        float vertical = Input.GetAxis("Vertical");
 
-        // Obtener la dirección de movimiento respecto a la cámara
-        // No rotamos el jugador, solo movemos en la dirección de la cámara
         Vector3 direccionMovimiento = camaraTransform.forward * vertical + camaraTransform.right * horizontal;
-        direccionMovimiento.y = 0;  // Asegurarse de que el movimiento no afecte la altura (eje Y)
+        direccionMovimiento.y = 0;
 
-        // Normalizar la dirección para evitar que el jugador se mueva más rápido en diagonal
         if (direccionMovimiento.magnitude > 0.1f)
         {
-            direccionMovimiento.Normalize();  // Normalizar para que el movimiento no sea más rápido en diagonal
+            direccionMovimiento.Normalize();
 
-            // Aplicar la nueva velocidad al jugador
             Vector3 nuevaVelocidad = direccionMovimiento * velocidadJugador;
-            nuevaVelocidad.y = rb.velocity.y; // Mantener la velocidad actual en el eje Y (salto)
+            nuevaVelocidad.y = rb.velocity.y;
             rb.velocity = nuevaVelocidad;
         }
         else
         {
-            // Si no hay movimiento, mantener la velocidad en cero
             rb.velocity = new Vector3(0, rb.velocity.y, 0);
         }
     }
 
     void salto()
     {
-        // Verificar si el jugador está en el suelo con un Raycast
         estaEnSuelo = Physics.Raycast(transform.position, Vector3.down, raycastSaltoLength, saltable);
 
         if (Input.GetButtonDown("Jump") && estaEnSuelo) {
