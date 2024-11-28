@@ -13,12 +13,12 @@ public class CamaraController : MonoBehaviour
 
     void Start()
     {
-        moverCamaraConJugador();
+       
     }
 
     void Update()
     {
-        
+        moverCamaraConJugador();
     }
 
     void moverCamaraConJugador()
