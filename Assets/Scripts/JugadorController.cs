@@ -28,6 +28,9 @@ public class JugadorController : MonoBehaviour
     public int vidaActual;
     public Vector3 spawnPoint = new Vector3(145f, 2.35f, 60f);
 
+    // Referencia a la cámara
+    public Transform camaraTransform; // Asegúrate de asignar la cámara en el editor
+
     private void Start()
     {   
         vidaActual = MAXVIDAS;
@@ -44,24 +47,39 @@ public class JugadorController : MonoBehaviour
         // Comprobar muerte
         comprobarMuerte();
         
-        //Si se puede mover y no ha muerto
+        // Si se puede mover y no ha muerto
         if (sePuedeMover && !estaMuerto) {
             caminar();
             salto();
         }
     }
 
-    // -------------------------- MOVIMIENTO INICIO -------------------------- 
+    // -------------------------- MOVIMIENTO INICIO --------------------------
     void caminar()
     {
-        float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
+        float horizontal = Input.GetAxis("Horizontal"); // A/D (izquierda/derecha)
+        float vertical = Input.GetAxis("Vertical"); // W/S (adelante/atras)
 
-        Vector3 direccionMovimiento = new Vector3(horizontal, 0, vertical);
+        // Obtener la dirección de movimiento respecto a la cámara
+        // No rotamos el jugador, solo movemos en la dirección de la cámara
+        Vector3 direccionMovimiento = camaraTransform.forward * vertical + camaraTransform.right * horizontal;
+        direccionMovimiento.y = 0;  // Asegurarse de que el movimiento no afecte la altura (eje Y)
 
-        Vector3 nuevaVelocidad = direccionMovimiento.normalized * velocidadJugador;
-        nuevaVelocidad.y = rb.velocity.y;
-        rb.velocity = nuevaVelocidad;
+        // Normalizar la dirección para evitar que el jugador se mueva más rápido en diagonal
+        if (direccionMovimiento.magnitude > 0.1f)
+        {
+            direccionMovimiento.Normalize();  // Normalizar para que el movimiento no sea más rápido en diagonal
+
+            // Aplicar la nueva velocidad al jugador
+            Vector3 nuevaVelocidad = direccionMovimiento * velocidadJugador;
+            nuevaVelocidad.y = rb.velocity.y; // Mantener la velocidad actual en el eje Y (salto)
+            rb.velocity = nuevaVelocidad;
+        }
+        else
+        {
+            // Si no hay movimiento, mantener la velocidad en cero
+            rb.velocity = new Vector3(0, rb.velocity.y, 0);
+        }
     }
 
     void salto()
