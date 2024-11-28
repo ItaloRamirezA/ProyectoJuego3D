@@ -22,6 +22,9 @@ public class JugadorController : MonoBehaviour
     public bool sePuedeMover;
     public bool estaMuerto;
 
+    // Transforms
+    public Transform camaraTransform;
+
     // Audio
     public AudioClip saltoSonido;
     public AudioClip muerteSonido;
@@ -32,13 +35,13 @@ public class JugadorController : MonoBehaviour
         estaMuerto = false;
         rb = GetComponent<Rigidbody>();
 
-        // Bloquear las rotaciones en X y Z para que no ruede
-        rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+        // Para que no rote
+        rb.constraints = RigidbodyConstraints.FreezeRotation;
     }
 
     private void Update()
     {
-        // Si se puede mover y no está muerto
+        // Si se puede mover y ha muerto
         if (sePuedeMover && !estaMuerto)
         {
             caminar();
@@ -52,14 +55,18 @@ public class JugadorController : MonoBehaviour
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
 
-        // Crear dirección de movimiento en el plano
-        Vector3 direccionMovimiento = Camera.main.transform.right * horizontal + Camera.main.transform.forward * vertical;
-        direccionMovimiento.y = 0; // Evitar movimiento vertical
+        Vector3 direccionMovimiento = camaraTransform.right * horizontal + camaraTransform.forward * vertical;
+        direccionMovimiento.y = 0;
 
-        // Aplicar movimiento ajustando directamente la velocidad del Rigidbody
         Vector3 nuevaVelocidad = direccionMovimiento.normalized * velocidadJugador;
-        nuevaVelocidad.y = rb.velocity.y; // Mantener la velocidad vertical actual
+        nuevaVelocidad.y = rb.velocity.y;
         rb.velocity = nuevaVelocidad;
+
+        // Que mire hacia donde se mueve
+        if (direccionMovimiento.magnitude > 0.1f)
+        {
+            transform.rotation = Quaternion.LookRotation(direccionMovimiento);
+        }
     }
 
     void salto()
@@ -69,7 +76,6 @@ public class JugadorController : MonoBehaviour
 
         if (Input.GetButtonDown("Jump") && estaEnSuelo)
         {
-            // Aplicar fuerza de salto directamente al Rigidbody
             rb.velocity = new Vector3(rb.velocity.x, fuerzaSaltoJugador, rb.velocity.z);
         }
     }

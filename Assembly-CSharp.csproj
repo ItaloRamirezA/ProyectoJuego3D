@@ -65,6 +65,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\JugadorController.cs" />
+    <Compile Include="Assets\Scripts\CamaraController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Art\Casa\Readme.txt" />
