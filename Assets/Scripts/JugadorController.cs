@@ -10,6 +10,7 @@ public class JugadorController : MonoBehaviour
 
     // Layers
     public LayerMask saltable;
+    public LayerMask agua;
 
     // Raycasts
     public float raycastSaltoLength = 1.1f;
@@ -19,8 +20,8 @@ public class JugadorController : MonoBehaviour
 
     // Verificaciones
     private bool estaEnSuelo;
-    public bool sePuedeMover;
-    public bool estaMuerto;
+    private bool sePuedeMover;
+    private bool estaMuerto;
 
     // Transforms
     public Transform camaraTransform;
@@ -29,8 +30,14 @@ public class JugadorController : MonoBehaviour
     public AudioClip saltoSonido;
     public AudioClip muerteSonido;
 
+    // Jugador
+    public int MAXVIDAS;
+    public int vidaActual;
+
+
     private void Start()
-    {
+    {   
+        vidaActual = MAXVIDAS;
         sePuedeMover = true;
         estaMuerto = false;
         rb = GetComponent<Rigidbody>();
@@ -41,6 +48,9 @@ public class JugadorController : MonoBehaviour
 
     private void Update()
     {
+        // Comprobar muerte
+        comprobarMuerte();
+        
         //Si se puede mover y ha muerto
         if (sePuedeMover && !estaMuerto) {
             caminar();
@@ -77,7 +87,36 @@ public class JugadorController : MonoBehaviour
             rb.velocity = new Vector3(rb.velocity.x, fuerzaSaltoJugador, rb.velocity.z);
         }
     }
-    // -------------------------- MOVIMIENTO FINAL -------------------------- 
+    // -------------------------- MOVIMIENTO FINAL --------------------------
+
+    // -------------------------- JUGADOR INICIO -------------------------- 
+    private void OnCollisionEnter(Collision other) {
+        // TODO baja la vida 2 veces
+        if (other.gameObject.CompareTag("agua")) {
+            Debug.Log("Tocando agua");
+            bajarVida();
+        }
+    }
+
+    void bajarVida()
+    {
+        vidaActual--;
+    }
+
+    void comprobarMuerte()
+    {
+        if (vidaActual <= 0) {
+            matar();
+        }
+    }
+
+    void matar()
+    {
+        estaMuerto = true;
+        sePuedeMover = false;
+        rb.velocity = Vector3.zero;
+    }
+    // -------------------------- JUGADOR FINAL -------------------------- 
 
     // -------------------------- GIZMOS INICIO -------------------------- 
     void OnDrawGizmos()
