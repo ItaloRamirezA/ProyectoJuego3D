@@ -441,6 +441,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   raycastSaltoLength: 1.5
+  camaraTransform: {fileID: 963194228}
   MAXVIDAS: 5
   vidaActual: 0
   spawnPoint: {x: 145, y: 2.35, z: 60}
