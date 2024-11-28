@@ -23,10 +23,6 @@ public class JugadorController : MonoBehaviour
     private bool sePuedeMover;
     private bool estaMuerto;
 
-    // Audio
-    public AudioClip saltoSonido;
-    public AudioClip muerteSonido;
-
     // Jugador
     public int MAXVIDAS;
     public int vidaActual;
@@ -83,7 +79,6 @@ public class JugadorController : MonoBehaviour
     private void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.CompareTag("agua")) {
-            Debug.Log("Tocando agua");
             bajarVida();
             tpearJugador(spawnPoint);
         }

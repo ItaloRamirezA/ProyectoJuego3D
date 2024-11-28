@@ -4,13 +4,19 @@ using UnityEngine;
 
 public class CamaraController : MonoBehaviour
 {
-    // Referencia al jugador
-    public Transform jugadorTransform;
+    public Vector2 sensibilidad;
 
-    void LateUpdate()
+    void Start()
     {
-        // Actualizar la posición y rotación de la cámara para coincidir con el jugador
-        transform.position = jugadorTransform.position;
-        transform.rotation = jugadorTransform.rotation;
+        Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    void Update()
+    {
+        float horizontal = Input.GetAxis("Mouse X");
+
+        if (horizontal != 0) {
+            transform.Rotate(Vector3.up * horizontal * sensibilidad.x);
+        }
     }
 }
