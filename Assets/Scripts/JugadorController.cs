@@ -33,6 +33,7 @@ public class JugadorController : MonoBehaviour
     // Jugador
     public int MAXVIDAS;
     public int vidaActual;
+    public Vector3 spawnPoint = new Vector3(145f, 2.35f, 60f);
 
 
     private void Start()
@@ -95,6 +96,8 @@ public class JugadorController : MonoBehaviour
         if (other.gameObject.CompareTag("agua")) {
             Debug.Log("Tocando agua");
             bajarVida();
+            // Lo tepea al spawnPoint
+            tpearJugador(spawnPoint);
         }
     }
 
@@ -115,6 +118,10 @@ public class JugadorController : MonoBehaviour
         estaMuerto = true;
         sePuedeMover = false;
         rb.velocity = Vector3.zero;
+    }
+
+    void tpearJugador(Vector3 posicionTP) {
+        transform.position = posicionTP;  
     }
     // -------------------------- JUGADOR FINAL -------------------------- 
 
