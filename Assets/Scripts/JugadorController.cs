@@ -23,9 +23,6 @@ public class JugadorController : MonoBehaviour
     private bool sePuedeMover;
     private bool estaMuerto;
 
-    // Transforms
-    public Transform camaraTransform;
-
     // Audio
     public AudioClip saltoSonido;
     public AudioClip muerteSonido;
@@ -34,7 +31,6 @@ public class JugadorController : MonoBehaviour
     public int MAXVIDAS;
     public int vidaActual;
     public Vector3 spawnPoint = new Vector3(145f, 2.35f, 60f);
-
 
     private void Start()
     {   
@@ -52,7 +48,7 @@ public class JugadorController : MonoBehaviour
         // Comprobar muerte
         comprobarMuerte();
         
-        //Si se puede mover y ha muerto
+        //Si se puede mover y no ha muerto
         if (sePuedeMover && !estaMuerto) {
             caminar();
             salto();
@@ -65,18 +61,11 @@ public class JugadorController : MonoBehaviour
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
 
-        Vector3 direccionMovimiento = camaraTransform.right * horizontal + camaraTransform.forward * vertical;
-        direccionMovimiento.y = 0;
+        Vector3 direccionMovimiento = new Vector3(horizontal, 0, vertical);
 
         Vector3 nuevaVelocidad = direccionMovimiento.normalized * velocidadJugador;
         nuevaVelocidad.y = rb.velocity.y;
         rb.velocity = nuevaVelocidad;
-
-        // Que mire hacia donde se mueve
-        if (direccionMovimiento.magnitude > 0.1f)
-        {
-            transform.rotation = Quaternion.LookRotation(direccionMovimiento);
-        }
     }
 
     void salto()
@@ -91,12 +80,11 @@ public class JugadorController : MonoBehaviour
     // -------------------------- MOVIMIENTO FINAL --------------------------
 
     // -------------------------- JUGADOR INICIO -------------------------- 
-    private void OnCollisionEnter(Collision other) {
-        // TODO baja la vida 2 veces
+    private void OnCollisionEnter(Collision other)
+    {
         if (other.gameObject.CompareTag("agua")) {
             Debug.Log("Tocando agua");
             bajarVida();
-            // Lo tepea al spawnPoint
             tpearJugador(spawnPoint);
         }
     }
@@ -120,7 +108,8 @@ public class JugadorController : MonoBehaviour
         rb.velocity = Vector3.zero;
     }
 
-    void tpearJugador(Vector3 posicionTP) {
+    void tpearJugador(Vector3 posicionTP)
+    {
         transform.position = posicionTP;  
     }
     // -------------------------- JUGADOR FINAL -------------------------- 

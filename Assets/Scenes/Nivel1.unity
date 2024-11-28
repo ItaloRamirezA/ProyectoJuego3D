@@ -295,7 +295,6 @@ GameObject:
   - component: {fileID: 417616744}
   - component: {fileID: 417616739}
   - component: {fileID: 417616738}
-  - component: {fileID: 417616743}
   - component: {fileID: 417616742}
   m_Layer: 0
   m_Name: --- JUGADOR  ---
@@ -386,7 +385,7 @@ Transform:
   m_GameObject: {fileID: 417616737}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 145, y: 2.35, z: 235.4}
+  m_LocalPosition: {x: 75.196, y: 4.07, z: 21.51}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -419,27 +418,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 1
---- !u!65 &417616743
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 417616737}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 2, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &417616744
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -461,7 +439,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   raycastSaltoLength: 1.5
-  camaraTransform: {fileID: 963194228}
   saltoSonido: {fileID: 0}
   muerteSonido: {fileID: 0}
   MAXVIDAS: 5
@@ -726,8 +703,8 @@ GameObject:
   m_Component:
   - component: {fileID: 963194228}
   - component: {fileID: 963194227}
-  - component: {fileID: 963194229}
   - component: {fileID: 963194226}
+  - component: {fileID: 963194229}
   m_Layer: 0
   m_Name: --- MAIN CAMERA ---
   m_TagString: MainCamera
@@ -803,7 +780,7 @@ Transform:
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.7200553, z: -0, w: 0.69391674}
-  m_LocalPosition: {x: 144.5, y: 2.7, z: 58.1}
+  m_LocalPosition: {x: 144.5, y: 2.6999998, z: 58.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -822,7 +799,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jugadorTransform: {fileID: 417616741}
-  musicaFondo: {fileID: 0}
 --- !u!4 &1031304644 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1438546959266459337, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
@@ -1111,7 +1087,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4360691434965607989, guid: 1387d66bee04e44448841d4ba6b476c1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.2
+      value: -0.7
       objectReference: {fileID: 0}
     - target: {fileID: 4360691434965607989, guid: 1387d66bee04e44448841d4ba6b476c1, type: 3}
       propertyPath: m_LocalPosition.z

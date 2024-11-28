@@ -4,25 +4,13 @@ using UnityEngine;
 
 public class CamaraController : MonoBehaviour
 {
-
-    // Transforms
+    // Referencia al jugador
     public Transform jugadorTransform;
 
-    // Audio
-    public AudioClip musicaFondo;
-
-    void Start()
+    void LateUpdate()
     {
-       
-    }
-
-    void Update()
-    {
-        moverCamaraConJugador();
-    }
-
-    void moverCamaraConJugador()
-    {
+        // Actualizar la posición y rotación de la cámara para coincidir con el jugador
         transform.position = jugadorTransform.position;
+        transform.rotation = jugadorTransform.rotation;
     }
 }
