@@ -41,9 +41,8 @@ public class JugadorController : MonoBehaviour
 
     private void Update()
     {
-        // Si se puede mover y ha muerto
-        if (sePuedeMover && !estaMuerto)
-        {
+        //Si se puede mover y ha muerto
+        if (sePuedeMover && !estaMuerto) {
             caminar();
             salto();
         }
@@ -74,8 +73,7 @@ public class JugadorController : MonoBehaviour
         // Verificar si el jugador está en el suelo con un Raycast
         estaEnSuelo = Physics.Raycast(transform.position, Vector3.down, raycastSaltoLength, saltable);
 
-        if (Input.GetButtonDown("Jump") && estaEnSuelo)
-        {
+        if (Input.GetButtonDown("Jump") && estaEnSuelo) {
             rb.velocity = new Vector3(rb.velocity.x, fuerzaSaltoJugador, rb.velocity.z);
         }
     }
