@@ -32,28 +32,23 @@ public class EnemigoController : MonoBehaviour
     {
         float distanciaAlJugador = Vector3.Distance(transform.position, jugador.transform.position);
 
-        if (distanciaAlJugador > distanciaDeteccion)
-        {
+        if (distanciaAlJugador > distanciaDeteccion) {
             cronometro += 1 * Time.deltaTime;
-            if (cronometro >= 4)
-            {
+            if (cronometro >= 4) {
                 rutina = Random.Range(0, 2);
                 cronometro = 0;
             }
 
-            switch (rutina)
-            {
-                case 0: // Enemigo quieto
+            switch (rutina) {
+                case 0:
                     animator.SetBool("caminar", false);
                     break;
-
-                case 1: // Elegir nueva dirección aleatoria
+                case 1:
                     grado = Random.Range(0, 360);
-                    angulo = Quaternion.Euler(0, grado, 0); // Solo rotar en Y
+                    angulo = Quaternion.Euler(0, grado, 0);
                     rutina++;
                     break;
-
-                case 2: // Caminar en dirección aleatoria
+                case 2:
                     transform.rotation = Quaternion.RotateTowards(transform.rotation, angulo, velocidadRotacion * Time.deltaTime);
                     Vector3 movimientoAleatorio = transform.forward * velocidad * Time.deltaTime;
                     rb.MovePosition(rb.position + movimientoAleatorio);
@@ -61,13 +56,10 @@ public class EnemigoController : MonoBehaviour
                     break;
             }
         }
-        else // Perseguir al jugador si está dentro del rango
-        {
-            // Calcular dirección hacia el jugador
+        else {
             Vector3 direccionHaciaJugador = jugador.transform.position - transform.position;
-            direccionHaciaJugador.y = 0; // Mantener la dirección en el plano XZ
+            direccionHaciaJugador.y = 0;
 
-            // Moverse hacia el jugador sin rotar
             Vector3 movimientoHaciaJugador = direccionHaciaJugador.normalized * velocidad * Time.deltaTime;
             rb.MovePosition(rb.position + movimientoHaciaJugador);
 
