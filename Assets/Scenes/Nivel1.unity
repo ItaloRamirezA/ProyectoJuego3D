@@ -432,7 +432,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfe752a1c5d437142b8de42d056199f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocidadJugador: 3
+  velocidadJugador: 5
   fuerzaSaltoJugador: 4
   saltable:
     serializedVersion: 2
@@ -979,15 +979,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1776966266084158026, guid: f99bbd0754201f448b27f0c455b92b76, type: 3}
       propertyPath: m_Name
-      value: Zombie
+      value: --- ENEMIGO ---
       objectReference: {fileID: 0}
-    - target: {fileID: 1872928210688669277, guid: f99bbd0754201f448b27f0c455b92b76, type: 3}
-      propertyPath: m_Mass
+    - target: {fileID: 7175528768591232937, guid: f99bbd0754201f448b27f0c455b92b76, type: 3}
+      propertyPath: jugador
+      value: 
+      objectReference: {fileID: 417616737}
+    - target: {fileID: 7175528768591232937, guid: f99bbd0754201f448b27f0c455b92b76, type: 3}
+      propertyPath: velocidad
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7175528768591232937, guid: f99bbd0754201f448b27f0c455b92b76, type: 3}
+      propertyPath: distanciaDeteccion
       value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 1872928210688669277, guid: f99bbd0754201f448b27f0c455b92b76, type: 3}
-      propertyPath: m_Constraints
-      value: 80
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
