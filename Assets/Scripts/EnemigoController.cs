@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class EnemigoController : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public int rutina;
+    public int cronometro;
+    public Animator animator;
+    public Quaternion angulo;
+    
     void Start()
     {
-        
+        animator = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         
