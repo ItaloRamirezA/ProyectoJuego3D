@@ -10,8 +10,6 @@ public class EnemigoController : MonoBehaviour
     private Quaternion angulo;
     private float grado;
     public float velocidad;
-    public bool atacando;
-
     private Rigidbody rb;
     public GameObject jugador;
 
@@ -26,10 +24,7 @@ public class EnemigoController : MonoBehaviour
 
     void Update()
     {
-        if (!atacando) // Solo se realiza el comportamiento si no está atacando
-        {
-            comportamiento();
-        }
+        comportamiento();
     }
 
     void comportamiento()
@@ -79,22 +74,15 @@ public class EnemigoController : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter(Collision other)
     {
-        if (collision.gameObject.CompareTag("Jugador"))
+        if (other.gameObject.CompareTag("Jugador"))
         {
-            animator.SetBool("caminar", false);
-
-            animator.SetTrigger("atacando");
-            atacando = true;
-        }
-    }
-
-    private void OnCollisionExit(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Jugador"))
-        {
-            atacando = false;
+            JugadorController jugadorController = other.gameObject.GetComponent<JugadorController>();
+            if (jugadorController != null)
+            {
+                jugadorController.bajarVida();
+            }
         }
     }
 }

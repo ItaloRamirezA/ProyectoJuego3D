@@ -100,9 +100,10 @@ public class JugadorController : MonoBehaviour
         }
     }
 
-    void bajarVida()
+    public void bajarVida()
     {
         vidaActual--;
+        comprobarMuerte();
     }
 
     void comprobarMuerte()
