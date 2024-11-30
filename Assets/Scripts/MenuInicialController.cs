@@ -12,4 +12,9 @@ public class MenuInicialController : MonoBehaviour
     public void salir() {
         Application.Quit();
     }
+
+    public void volverAJugar() {
+        SceneManager.LoadScene("Inicio");
+        Time.timeScale = 1f;
+    }
 }

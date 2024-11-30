@@ -30,8 +30,9 @@ public class JugadorController : MonoBehaviour
     public int vidaActual;
     public Vector3 spawnPoint = new Vector3(145f, 2.35f, 60f);
 
-    // Referencia a la cámara
+    // Referencias
     public Transform camaraTransform;
+    public Transform lluviaParticulas;
 
     // Eventos
     public UnityEvent<int> cambioVida;
@@ -40,8 +41,7 @@ public class JugadorController : MonoBehaviour
     AudioClip muerteSonido;
     AudioClip saltoSonido;
 
-    private void Start()
-    {   
+    private void Start() {
         vidaActual = MAXVIDAS;
         sePuedeMover = true;
         estaMuerto = false;
@@ -52,37 +52,35 @@ public class JugadorController : MonoBehaviour
         cambioVida.Invoke(vidaActual);
     }
 
-    private void Update()
-    {
+    private void Update() {
         // Comprobar muerte
         comprobarMuerte();
-        
+
         // Si se puede mover y no ha muerto
         if (sePuedeMover && !estaMuerto) {
             caminar();
             salto();
         }
+
+        lluviaParticulas.position = transform.position;
     }
 
     // -------------------------- MOVIMIENTO INICIO --------------------------
-    void caminar()
-    {
+    void caminar() {
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
 
         Vector3 direccionMovimiento = camaraTransform.forward * vertical + camaraTransform.right * horizontal;
         direccionMovimiento.y = 0;
 
-        if (direccionMovimiento.magnitude > 0.1f)
-        {
+        if (direccionMovimiento.magnitude > 0.1f) {
             direccionMovimiento.Normalize();
 
             Vector3 nuevaVelocidad = direccionMovimiento * velocidadJugador;
             nuevaVelocidad.y = rb.velocity.y;
             rb.velocity = nuevaVelocidad;
         }
-        else
-        {
+        else {
             rb.velocity = new Vector3(0, rb.velocity.y, 0);
         }
     }
@@ -97,54 +95,49 @@ public class JugadorController : MonoBehaviour
     }
     // -------------------------- MOVIMIENTO FINAL --------------------------
 
-    // -------------------------- JUGADOR INICIO -------------------------- 
-    private void OnCollisionEnter(Collision other)
-    {
+    // -------------------------- JUGADOR INICIO --------------------------
+    private void OnCollisionEnter(Collision other) {
         if (other.gameObject.CompareTag("agua")) {
             bajarVida();
             tpearJugador(spawnPoint);
         }
     }
 
-    public void bajarVida()
-    {
+    public void bajarVida() {
         int vidaTemporal = vidaActual - 1;
 
         if (vidaTemporal < 0) {
             vidaActual = 0;
-        } else {
+        }
+        else {
             vidaActual = vidaTemporal;
             cambioVida.Invoke(vidaActual);
             comprobarMuerte();
         }
     }
 
-    void comprobarMuerte()
-    {
+    void comprobarMuerte() {
         if (vidaActual <= 0) {
             matar();
             menuPausaController.mostrarMenuMuerte();
         }
     }
 
-    void matar()
-    {
+    void matar() {
         estaMuerto = true;
         sePuedeMover = false;
         rb.velocity = Vector3.zero;
     }
 
-    void tpearJugador(Vector3 posicionTP)
-    {
-        transform.position = posicionTP;  
+    void tpearJugador(Vector3 posicionTP) {
+        transform.position = posicionTP;
     }
-    // -------------------------- JUGADOR FINAL -------------------------- 
+    // -------------------------- JUGADOR FINAL --------------------------
 
-    // -------------------------- GIZMOS INICIO -------------------------- 
-    void OnDrawGizmos()
-    {
+    // -------------------------- GIZMOS INICIO --------------------------
+    void OnDrawGizmos() {
         Gizmos.color = Color.red;
         Gizmos.DrawLine(transform.position, transform.position + Vector3.down * raycastSaltoLength);
     }
-    // -------------------------- GIZMOS FINAL -------------------------- 
+    // -------------------------- GIZMOS FINAL --------------------------
 }
