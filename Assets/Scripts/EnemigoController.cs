@@ -59,10 +59,16 @@ public class EnemigoController : MonoBehaviour
         else {
             Vector3 direccionHaciaJugador = jugador.transform.position - transform.position;
             direccionHaciaJugador.y = 0;
+            
+            Quaternion rotacionHaciaJugador = Quaternion.LookRotation(direccionHaciaJugador);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, rotacionHaciaJugador, 2);
+
+            Vector3 posicionActual = transform.position;
 
             Vector3 movimientoHaciaJugador = direccionHaciaJugador.normalized * velocidad * Time.deltaTime;
-            rb.MovePosition(rb.position + movimientoHaciaJugador);
+            transform.position = new Vector3(posicionActual.x + movimientoHaciaJugador.x, posicionActual.y, posicionActual.z + movimientoHaciaJugador.z);
 
+            // Activar la animación de caminar
             animator.SetBool("caminar", true);
         }
     }
