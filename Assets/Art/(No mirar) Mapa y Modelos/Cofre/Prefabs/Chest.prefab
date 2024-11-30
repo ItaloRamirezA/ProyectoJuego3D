@@ -92,6 +92,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6406354295519821929}
+  - component: {fileID: 1571805936557237178}
   m_Layer: 0
   m_Name: Chest
   m_TagString: Untagged
@@ -116,6 +117,27 @@ Transform:
   - {fileID: 5685190415657599232}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1571805936557237178
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8919401342887559168}
+  m_Material: {fileID: 13400000, guid: 9b8a88b3e24c3dc4d97226e6b69f8de5, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 0.8514246, z: 1}
+  m_Center: {x: 0, y: 0.41664296, z: 0}
 --- !u!1 &8995426303571250700
 GameObject:
   m_ObjectHideFlags: 0
