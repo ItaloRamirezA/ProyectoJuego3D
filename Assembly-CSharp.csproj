@@ -66,6 +66,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\CorazonesController.cs" />
     <Compile Include="Assets\Scripts\JugadorController.cs" />
+    <Compile Include="Assets\Scripts\LookAtCamera.cs" />
     <Compile Include="Assets\Scripts\EnemigoController.cs" />
     <Compile Include="Assets\Scripts\MenuPausaController.cs" />
     <Compile Include="Assets\Scripts\MenuInicialController.cs" />
