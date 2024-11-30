@@ -308,6 +308,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   botonPausa: {fileID: 1972581895}
   menuPausa: {fileID: 1172202654}
+  camaraController: {fileID: 417616745}
 --- !u!1 &401235820
 GameObject:
   m_ObjectHideFlags: 0

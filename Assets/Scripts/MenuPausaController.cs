@@ -10,6 +10,9 @@ public class MenuPausaController : MonoBehaviour
     public GameObject menuPausa;
     private bool juegoPausado;
 
+    
+    public CamaraController camaraController;
+
     private void Update() {
         if (Input.GetKeyDown(KeyCode.Escape)) {
             if (juegoPausado) {
@@ -27,6 +30,8 @@ public class MenuPausaController : MonoBehaviour
         botonPausa.SetActive(false);
         menuPausa.SetActive(true);
 
+        camaraController.enabled = false;
+
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }
@@ -37,6 +42,8 @@ public class MenuPausaController : MonoBehaviour
         Time.timeScale = 1f;
         botonPausa.SetActive(true);
         menuPausa.SetActive(false);
+
+        camaraController.enabled = true;
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
