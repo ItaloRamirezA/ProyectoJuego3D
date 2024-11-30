@@ -495,9 +495,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d5a290899f48be458adcf809706f3e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocidad: 1
+  velocidad: 2
   jugador: {fileID: 0}
-  distanciaDeteccion: 5
+  distanciaDeteccion: 10
 --- !u!95 &4972802055694576266
 Animator:
   serializedVersion: 5
@@ -544,7 +544,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 80
   m_CollisionDetection: 0
 --- !u!136 &3129411268939067601
 CapsuleCollider:
@@ -565,10 +565,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.4087715
+  m_Radius: 0.37410927
   m_Height: 2.0604997
   m_Direction: 1
-  m_Center: {x: 0, y: 1.0132349, z: -0.091228485}
+  m_Center: {x: 0, y: 1.0132349, z: 0.061903}
 --- !u!1 &1786999476906242876
 GameObject:
   m_ObjectHideFlags: 0

@@ -29,7 +29,6 @@ public class CamaraController : MonoBehaviour
         }
 
         if (vertical != 0) {
-            //camaraTransform.Rotate(Vector3.left * vertical * sensibilidad.y);
             float angle = camaraTransform.localEulerAngles.x - vertical * sensibilidad.y;
             camaraTransform.localEulerAngles = Vector3.right * angle;
         }
