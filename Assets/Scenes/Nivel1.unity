@@ -1151,6 +1151,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: --- ENEMIGO ---
       objectReference: {fileID: 0}
+    - target: {fileID: 1872928210688669277, guid: f99bbd0754201f448b27f0c455b92b76, type: 3}
+      propertyPath: m_Constraints
+      value: 80
+      objectReference: {fileID: 0}
     - target: {fileID: 3129411268939067601, guid: f99bbd0754201f448b27f0c455b92b76, type: 3}
       propertyPath: m_Radius
       value: 0.37410927
