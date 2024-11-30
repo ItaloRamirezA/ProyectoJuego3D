@@ -56,8 +56,16 @@ public class MenuPausaController : MonoBehaviour
     }
 
     public void reiniciar() {
-        Time.timeScale = 1f;
         SceneManager.LoadScene("Nivel1");
+
+        juegoPausado = false;
+
+        Time.timeScale = 1f;
+
+        camaraController.enabled = true;
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     public void mostrarMenuMuerte() {
