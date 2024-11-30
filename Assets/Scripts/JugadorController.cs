@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class JugadorController : MonoBehaviour
 {
@@ -31,6 +32,9 @@ public class JugadorController : MonoBehaviour
     // Referencia a la cámara
     public Transform camaraTransform;
 
+    // Eventos
+    public UnityEvent<int> cambioVida;
+
     // Audios
     AudioClip muerteSonido;
     AudioClip saltoSonido;
@@ -42,8 +46,9 @@ public class JugadorController : MonoBehaviour
         estaMuerto = false;
         rb = GetComponent<Rigidbody>();
 
-        // Para que no rote
         rb.constraints = RigidbodyConstraints.FreezeRotation;
+
+        cambioVida.Invoke(vidaActual);
     }
 
     private void Update()
@@ -103,6 +108,7 @@ public class JugadorController : MonoBehaviour
     public void bajarVida()
     {
         vidaActual--;
+        cambioVida.Invoke(vidaActual);
         comprobarMuerte();
     }
 
