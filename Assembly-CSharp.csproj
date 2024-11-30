@@ -70,9 +70,9 @@
     <Compile Include="Assets\Scripts\EnemigoController.cs" />
     <Compile Include="Assets\Scripts\MenuPausaController.cs" />
     <Compile Include="Assets\Scripts\MenuInicialController.cs" />
-    <Compile Include="Assets\ControladorSonido.cs" />
     <Compile Include="Assets\Scripts\MinimapController.cs" />
     <Compile Include="Assets\Scripts\CamaraController.cs" />
+    <Compile Include="Assets\Scripts\ControladorSonido.cs" />
     <Compile Include="Assets\Scripts\CambiarEscena.cs" />
   </ItemGroup>
   <ItemGroup>
