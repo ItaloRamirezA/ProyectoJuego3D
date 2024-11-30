@@ -107,9 +107,15 @@ public class JugadorController : MonoBehaviour
 
     public void bajarVida()
     {
-        vidaActual--;
-        cambioVida.Invoke(vidaActual);
-        comprobarMuerte();
+        int vidaTemporal = vidaActual - 1;
+
+        if (vidaTemporal < 0) {
+            vidaActual = 0;
+        } else {
+            vidaActual = vidaTemporal;
+            cambioVida.Invoke(vidaActual);
+            comprobarMuerte();
+        }
     }
 
     void comprobarMuerte()

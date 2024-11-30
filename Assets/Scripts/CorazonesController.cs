@@ -31,7 +31,6 @@ public class CorazonesController : MonoBehaviour
         for (int i = 0; i < cantidadMaximaVida; i++)
         {
             GameObject corazon = Instantiate(corazonesPrefab, transform);
-
             listaCorazones.Add(corazon.GetComponent<Image>());
         }
         indexActual = cantidadMaximaVida - 1;
@@ -39,8 +38,28 @@ public class CorazonesController : MonoBehaviour
 
     private void cambiarVida(int vidaActual)
     {
-        throw new NotImplementedException();
+        if (vidaActual <= indexActual) {
+            quitarCorazones(vidaActual);
+        } else {
+            agregarCorazones(vidaActual);
+        }
     }
 
-    
+    private void agregarCorazones(int vidaActual)
+    {
+        for (int i = indexActual; i < vidaActual; i++)
+        {
+           indexActual = i;
+           listaCorazones[indexActual].sprite = corazonLleno;
+        }
+    }
+
+    private void quitarCorazones(int vidaActual)
+    {
+        for (int i = indexActual; i >= vidaActual; i--)
+        {
+           indexActual = i;
+           listaCorazones[indexActual].sprite = corazonVacio;
+        }
+    }
 }
