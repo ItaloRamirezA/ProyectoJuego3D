@@ -34,6 +34,7 @@ public class JugadorController : MonoBehaviour
     // Referencias
     public Transform camaraTransform;
     public Transform lluviaParticulas;
+    public GameObject moneda;
 
     // Eventos
     public UnityEvent<int> cambioVida;
