@@ -38,8 +38,10 @@ public class JugadorController : MonoBehaviour
     public UnityEvent<int> cambioVida;
 
     // Audios
-    AudioClip muerteSonido;
-    AudioClip saltoSonido;
+    public AudioClip muerteSonido;
+    public AudioClip danoSonido;
+    public AudioClip caminarSonido;
+    public AudioClip sonidoFondo;
 
     private void Start() {
         vidaActual = MAXVIDAS;
@@ -113,14 +115,21 @@ public class JugadorController : MonoBehaviour
             vidaActual = vidaTemporal;
             cambioVida.Invoke(vidaActual);
             comprobarMuerte();
+            if (comprobarMuerte()) {
+                ControladorSonido.Instance.ejecutarSonido(muerteSonido);
+            }
+            
         }
+        ControladorSonido.Instance.ejecutarSonido(danoSonido);
     }
 
-    void comprobarMuerte() {
+    bool comprobarMuerte() {
         if (vidaActual <= 0) {
             matar();
             menuPausaController.mostrarMenuMuerte();
+            return true;
         }
+        return false;
     }
 
     void matar() {
