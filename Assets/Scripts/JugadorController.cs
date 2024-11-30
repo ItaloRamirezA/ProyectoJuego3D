@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class JugadorController : MonoBehaviour
 {
@@ -102,6 +103,13 @@ public class JugadorController : MonoBehaviour
         if (other.gameObject.CompareTag("agua")) {
             bajarVida();
             tpearJugador(spawnPoint);
+        }
+
+        if (other.gameObject.CompareTag("Casa")) {
+            SceneManager.LoadScene("Fin");
+
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
         }
     }
 

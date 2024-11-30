@@ -73,6 +73,7 @@
     <Compile Include="Assets\ControladorSonido.cs" />
     <Compile Include="Assets\Scripts\MinimapController.cs" />
     <Compile Include="Assets\Scripts\CamaraController.cs" />
+    <Compile Include="Assets\Scripts\CambiarEscena.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
