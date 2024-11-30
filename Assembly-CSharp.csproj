@@ -66,6 +66,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\JugadorController.cs" />
     <Compile Include="Assets\Scripts\EnemigoController.cs" />
+    <Compile Include="Assets\Scripts\MinimapController.cs" />
     <Compile Include="Assets\Scripts\CamaraController.cs" />
   </ItemGroup>
   <ItemGroup>
