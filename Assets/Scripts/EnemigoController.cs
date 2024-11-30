@@ -10,6 +10,7 @@ public class EnemigoController : MonoBehaviour
     private Quaternion angulo;
     private float grado;
     public float velocidad;
+    public bool atacando;
 
     private Rigidbody rb;
     public GameObject jugador;
@@ -25,21 +26,27 @@ public class EnemigoController : MonoBehaviour
 
     void Update()
     {
-        comportamiento();
+        if (!atacando) // Solo se realiza el comportamiento si no está atacando
+        {
+            comportamiento();
+        }
     }
 
     void comportamiento()
     {
         float distanciaAlJugador = Vector3.Distance(transform.position, jugador.transform.position);
 
-        if (distanciaAlJugador > distanciaDeteccion) {
+        if (distanciaAlJugador > distanciaDeteccion)
+        {
             cronometro += 1 * Time.deltaTime;
-            if (cronometro >= 4) {
+            if (cronometro >= 4)
+            {
                 rutina = Random.Range(0, 2);
                 cronometro = 0;
             }
 
-            switch (rutina) {
+            switch (rutina)
+            {
                 case 0:
                     animator.SetBool("caminar", false);
                     break;
@@ -56,20 +63,38 @@ public class EnemigoController : MonoBehaviour
                     break;
             }
         }
-        else {
+        else
+        {
             Vector3 direccionHaciaJugador = jugador.transform.position - transform.position;
             direccionHaciaJugador.y = 0;
-            
+
             Quaternion rotacionHaciaJugador = Quaternion.LookRotation(direccionHaciaJugador);
             transform.rotation = Quaternion.RotateTowards(transform.rotation, rotacionHaciaJugador, 2);
 
             Vector3 posicionActual = transform.position;
-
             Vector3 movimientoHaciaJugador = direccionHaciaJugador.normalized * velocidad * Time.deltaTime;
             transform.position = new Vector3(posicionActual.x + movimientoHaciaJugador.x, posicionActual.y, posicionActual.z + movimientoHaciaJugador.z);
 
-            // Activar la animación de caminar
             animator.SetBool("caminar", true);
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Jugador"))
+        {
+            animator.SetBool("caminar", false);
+
+            animator.SetTrigger("atacando");
+            atacando = true;
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Jugador"))
+        {
+            atacando = false;
         }
     }
 }
