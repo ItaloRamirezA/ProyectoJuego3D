@@ -9,10 +9,6 @@ public class MenuInicialController : MonoBehaviour
         SceneManager.LoadScene("Nivel1");
     }
 
-    public void controles() {
-        
-    }
-
     public void salir() {
         Application.Quit();
     }

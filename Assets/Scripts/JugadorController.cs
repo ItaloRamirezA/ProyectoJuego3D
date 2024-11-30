@@ -18,6 +18,7 @@ public class JugadorController : MonoBehaviour
 
     // Elementos
     private Rigidbody rb;
+    public MenuPausaController menuPausaController;
 
     // Verificaciones
     private bool estaEnSuelo;
@@ -122,6 +123,7 @@ public class JugadorController : MonoBehaviour
     {
         if (vidaActual <= 0) {
             matar();
+            menuPausaController.mostrarMenuMuerte();
         }
     }
 

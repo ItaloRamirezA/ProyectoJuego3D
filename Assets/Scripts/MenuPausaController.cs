@@ -8,8 +8,8 @@ public class MenuPausaController : MonoBehaviour
 {
     public GameObject botonPausa;
     public GameObject menuPausa;
+    public GameObject menuMuerte;
     private bool juegoPausado;
-
     
     public CamaraController camaraController;
 
@@ -53,5 +53,22 @@ public class MenuPausaController : MonoBehaviour
         juegoPausado = false;
         Time.timeScale = 1f;
         SceneManager.LoadScene("Inicio");
+    }
+
+    public void reiniciar() {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("Nivel1");
+    }
+
+    public void mostrarMenuMuerte() {
+        botonPausa.SetActive(false);
+        menuMuerte.SetActive(true);
+        
+        Time.timeScale = 0f;
+
+        camaraController.enabled = false;
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 }
