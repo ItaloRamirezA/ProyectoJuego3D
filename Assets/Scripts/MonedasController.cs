@@ -7,6 +7,7 @@ public class MonedasController : MonoBehaviour
 {
     public int cantidadMonedas;
     public TextMeshProUGUI numero;
+    public AudioClip monedaSonido;
 
     private void Update() {
         numero.text = cantidadMonedas.ToString();
@@ -16,6 +17,7 @@ public class MonedasController : MonoBehaviour
         if (other.gameObject.CompareTag("Moneda")) {
             Destroy(other.gameObject);
             cantidadMonedas++;
+            ControladorSonido.Instance.ejecutarSonido(monedaSonido);
         }
     }
 }

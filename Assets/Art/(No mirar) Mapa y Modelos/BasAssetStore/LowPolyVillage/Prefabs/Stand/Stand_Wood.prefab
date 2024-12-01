@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3138987093718565515}
   - component: {fileID: 894839087032268353}
   - component: {fileID: 1993562780264032967}
+  - component: {fileID: 6214413152022469524}
   m_Layer: 0
   m_Name: Stand_Wood
   m_TagString: Untagged
@@ -106,3 +107,24 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: -1
   m_Mesh: {fileID: 7860279226368031715, guid: 12dd7e014af8b8948bdc22f5196bd8b7, type: 3}
+--- !u!65 &6214413152022469524
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1687696578583648148}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.1545448, y: 1.1595585, z: 1.6164436}
+  m_Center: {x: -15.166294, y: 0.57552385, z: 39.412407}
