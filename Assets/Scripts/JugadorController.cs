@@ -42,8 +42,6 @@ public class JugadorController : MonoBehaviour
     // Audios
     public AudioClip muerteSonido;
     public AudioClip danoSonido;
-    public AudioClip caminarSonido;
-    public AudioClip sonidoFondo;
 
     private void Start() {
         vidaActual = MAXVIDAS;
